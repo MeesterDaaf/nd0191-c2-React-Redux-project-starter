@@ -1,7 +1,8 @@
-import { _getQuestions, _saveQuestionAnswer } from '../utils/_DATA';
+import { _getQuestions, _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA';
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER';
+export const ADD_QUESTION = 'ADD_QUESTION';
 
 export function receiveQuestions(questions) {
     return {
@@ -46,6 +47,37 @@ export function handleSaveAnswer(authedUser, qid, answer) {
         } catch (error) {
             console.error('Error saving answer:', error);
             alert('There was an error saving your answer. Please try again.');
+        }
+    };
+}
+
+export function addQuestion(question) {
+    return {
+        type: ADD_QUESTION,
+        question,
+    };
+}
+
+export function handleAddQuestion(optionOneText, optionTwoText) {
+    return async (dispatch, getState) => {
+        const { authedUser } = getState();
+        
+        try {
+            const question = await _saveQuestion({
+                optionOneText,
+                optionTwoText,
+                author: authedUser
+            });
+            dispatch(addQuestion(question));
+            // Also update the user's questions array
+            dispatch({
+                type: 'ADD_USER_QUESTION',
+                authedUser,
+                qid: question.id
+            });
+        } catch (error) {
+            console.error('Error saving question:', error);
+            throw error;
         }
     };
 } 
