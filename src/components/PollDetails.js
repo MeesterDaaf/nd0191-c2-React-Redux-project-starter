@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Header from './Header';
 import { _saveQuestionAnswer } from '../utils/_DATA';
 import { handleSaveAnswer } from '../actions/questions';
+import NotFound from './NotFound';
 
 const PollDetails = () => {
     const { id } = useParams();
@@ -17,7 +18,7 @@ const PollDetails = () => {
     const users = useSelector((state) => state.users);
 
     if (!question) {
-        return <Navigate to="/404" />;
+        return <NotFound />;
     }
 
     const author = users[question.author];

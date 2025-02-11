@@ -7,6 +7,7 @@ import PollDetails from './PollDetails';
 import NewPoll from './NewPoll';
 import Leaderboard from './Leaderboard';
 import { handleInitialData } from '../actions/shared';
+import NotFound from './NotFound';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/add" element={authedUser ? <NewPoll /> : <Navigate to="/login" />} />
             <Route path="/leaderboard" element={authedUser ? <Leaderboard /> : <Navigate to="/login" />} />
             <Route path="/" element={<Navigate to={authedUser ? "/dashboard" : "/login"} replace />} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 }
