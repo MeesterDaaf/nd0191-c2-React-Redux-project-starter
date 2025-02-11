@@ -8,12 +8,20 @@ import { configureStore } from '@reduxjs/toolkit';
 import { BrowserRouter } from 'react-router-dom';
 import authedUserReducer from './reducers/authedUser';
 import usersReducer from './reducers/users';
+import questionsReducer from './reducers/questions';
 
 const store = configureStore({
   reducer: {
     authedUser: authedUserReducer,
-    users: usersReducer
-  }
+    users: usersReducer,
+    questions: questionsReducer
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+});
+
+// For debugging
+store.subscribe(() => {
+  console.log('Store state:', store.getState());
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,12 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authedUserReducer from './reducers/authedUser';
-import usersReducer from './reducers/users';
+// or if using legacy Redux: import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
 
 const store = configureStore({
-    reducer: {
-        authedUser: authedUserReducer,
-        users: usersReducer,
-    }
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk)
+});
+
+// If using legacy Redux:
+// const store = createStore(rootReducer, applyMiddleware(thunk));
+
+// For debugging
+store.subscribe(() => {
+    console.log('Store state:', store.getState());
 });
 
 export default store; 
