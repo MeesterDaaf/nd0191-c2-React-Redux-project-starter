@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match snapshot 1`] = `
+<div>
+  <div
+    class="flex justify-center items-center px-4 py-12 min-h-screen bg-gray-50 sm:px-6 lg:px-8"
+  >
+    <div
+      class="space-y-8 w-full max-w-md"
+    >
+      <div>
+        <h2
+          class="text-3xl font-bold text-center"
+        >
+          Employee Polls
+        </h2>
+        <p
+          class="mt-2 text-sm text-center text-gray-600"
+        >
+          Please sign in to continue
+        </p>
+      </div>
+      <form
+        class="mt-8 space-y-6"
+      >
+        <div
+          class="rounded-md shadow-sm"
+        >
+          <select
+            class="block relative px-3 py-2 w-full placeholder-gray-500 text-gray-900 rounded-md border border-gray-300 appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            required=""
+          >
+            <option
+              value=""
+            >
+              Select a user
+            </option>
+          </select>
+        </div>
+        <button
+          class="px-4 py-2 w-full text-sm font-medium text-white bg-indigo-600 rounded-md border border-transparent shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          disabled=""
+          type="submit"
+        >
+          Sign in
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;
