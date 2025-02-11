@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import PollDetails from './PollDetails';
 import { handleInitialData } from '../actions/shared';
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
             <Route path="/login" element={!authedUser ? <Login /> : <Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={authedUser ? <Dashboard /> : <Navigate to="/login" />} />
+            <Route path="/questions/:id" element={authedUser ? <PollDetails /> : <Navigate to="/login" />} />
             <Route path="/" element={<Navigate to={authedUser ? "/dashboard" : "/login"} replace />} />
         </Routes>
     );
