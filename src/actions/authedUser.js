@@ -1,5 +1,5 @@
 export const SET_AUTHED_USER = 'SET_AUTHED_USER'
-export const DELETE_AUTHED_USER = 'DELETE_AUTHED_USER'
+export const LOGOUT_USER = 'LOGOUT_USER'
 
 
 export function setAuthedUser(id) {
@@ -9,9 +9,8 @@ export function setAuthedUser(id) {
     }
 }
 
-export function deleteAuthedUser() {
+export function logoutUser() {
     return {
-        type: DELETE_AUTHED_USER,
-        id: ''
+        type: LOGOUT_USER,
     }
 }
