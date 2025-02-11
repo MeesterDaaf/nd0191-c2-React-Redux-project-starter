@@ -6,10 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { BrowserRouter } from 'react-router-dom';
+import authedUserReducer from './reducers/authedUser';
+import usersReducer from './reducers/users';
 
 const store = configureStore({
   reducer: {
-    count: (state = 0, action) => state
+    authedUser: authedUserReducer,
+    users: usersReducer
   }
 });
 
