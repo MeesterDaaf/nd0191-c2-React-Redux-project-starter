@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import Navigation from '../components/Navigation';
+import Header from '../components/Header';
 
 const mockStore = configureStore([]);
 
@@ -26,7 +26,7 @@ describe('Navigation Component', () => {
     render(
       <Provider store={store}>
         <BrowserRouter>
-          <Navigation />
+          <Header />
         </BrowserRouter>
       </Provider>
     );

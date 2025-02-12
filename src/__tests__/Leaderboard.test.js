@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import Leaderboard from '../components/Leaderboard';
 
@@ -38,20 +39,22 @@ describe('Leaderboard Component', () => {
   test('displays correct user statistics', () => {
     render(
       <Provider store={store}>
-        <Leaderboard />
+        <MemoryRouter>
+          <Leaderboard />
+        </MemoryRouter>
       </Provider>
     );
 
     // Check Sarah's stats
-    const sarahRow = screen.getByText('Sarah Edo').closest('tr');
-    expect(sarahRow).toHaveTextContent('2'); // Questions asked
-    expect(sarahRow).toHaveTextContent('3'); // Questions answered
-    expect(sarahRow).toHaveTextContent('5'); // Total score
+    const sarahSection = screen.getByText('Sarah Edo').closest('li');
+    expect(sarahSection).toHaveTextContent('2'); // Questions asked
+    expect(sarahSection).toHaveTextContent('3'); // Questions answered
+    expect(sarahSection).toHaveTextContent('5'); // Total score
 
     // Check Tyler's stats
-    const tylerRow = screen.getByText('Tyler McGinnis').closest('tr');
-    expect(tylerRow).toHaveTextContent('1'); // Questions asked
-    expect(tylerRow).toHaveTextContent('2'); // Questions answered
-    expect(tylerRow).toHaveTextContent('3'); // Total score
+    const tylerSection = screen.getByText('Tyler McGinnis').closest('li');
+    expect(tylerSection).toHaveTextContent('1'); // Questions asked
+    expect(tylerSection).toHaveTextContent('2'); // Questions answered
+    expect(tylerSection).toHaveTextContent('3'); // Total score
   });
 }); 
