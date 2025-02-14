@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { _getUsers } from '../utils/_DATA';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
 
@@ -8,6 +8,7 @@ const Login = () => {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -23,8 +24,9 @@ const Login = () => {
         e.preventDefault();
         // Dispatch action to set authenticated user
         dispatch(setAuthedUser(selectedUser));
-        // Navigate to dashboard
-        navigate('/dashboard');
+        // Navigate to the redirect path from state, or home if none exists
+        const redirectPath = location.state?.from || '/dashboard';
+        navigate(redirectPath);
     };
 
     return (

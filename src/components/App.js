@@ -8,6 +8,7 @@ import NewPoll from './NewPoll';
 import Leaderboard from './Leaderboard';
 import { handleInitialData } from '../actions/shared';
 import NotFound from './NotFound';
+import ProtectedRoute from './ProtectedRoute';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -19,12 +20,52 @@ const App = () => {
 
     return (
         <Routes>
-            <Route path="/login" element={!authedUser ? <Login /> : <Navigate to="/dashboard" />} />
-            <Route path="/dashboard" element={authedUser ? <Dashboard /> : <Navigate to="/login" />} />
-            <Route path="/questions/:id" element={authedUser ? <PollDetails /> : <Navigate to="/login" />} />
-            <Route path="/add" element={authedUser ? <NewPoll /> : <Navigate to="/login" />} />
-            <Route path="/leaderboard" element={authedUser ? <Leaderboard /> : <Navigate to="/login" />} />
-            <Route path="/" element={<Navigate to={authedUser ? "/dashboard" : "/login"} replace />} />
+            <Route path="/login" element={!authedUser ? <Login /> : <Navigate to="/" />} />
+
+            {/* Protected Routes */}
+            <Route
+                path="/"
+                element={
+                    <ProtectedRoute>
+                        <Dashboard />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/dashboard"
+                element={
+                    <ProtectedRoute>
+                        <Dashboard />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/add"
+                element={
+                    <ProtectedRoute>
+                        <NewPoll />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/leaderboard"
+                element={
+                    <ProtectedRoute>
+                        <Leaderboard />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/questions/:id"
+                element={
+                    <ProtectedRoute>
+                        <PollDetails />
+                    </ProtectedRoute>
+                }
+            />
+
+            {/* 404 Route */}
             <Route path="*" element={<NotFound />} />
         </Routes>
     );
